@@ -1,0 +1,19 @@
+
+:host {
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    place-content: stretch flex-start;
+    align-items: stretch;
+    flex: 1 1 0%;
+}
+
+::ng-deep {
+    .mat-tab-body {
+        padding: 24px;
+    }
+
+    .mat-tab-body-wrapper {
+        height: 100%;
+    }
+}

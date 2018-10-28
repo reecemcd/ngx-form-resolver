@@ -1,0 +1,74 @@
+<!-- Basic Form -->
+
+<h1>Dynamic Form Resolver</h1>
+
+<div fxLayout="column" fxLayoutGap="24px">
+
+  <!-- Car Form Group -->
+  <mat-card fxFlex>
+    <mat-card-title>Car Form Group</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="carFormGroup" fxLayout="column">
+
+        <mat-form-field>
+          <mat-select formControlName="make" placeholder="Make">
+            <mat-option value="Audi">Audi</mat-option>
+            <mat-option value="Ford">Ford</mat-option>
+            <mat-option value="Volvo">Volvo</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="model" matInput placeholder="Model">
+        </mat-form-field>
+
+        <mat-form-field *ngIf="showYearControl">
+          <input formControlName="year" matInput placeholder="Year">
+        </mat-form-field>
+        
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <div fxLayout="row" fxLayoutGap="24px">
+
+    <!-- Actions -->
+    <mat-card fxFlex>
+        <mat-card-title>Actions</mat-card-title>
+        <mat-card-content fxLayout="column" fxLayoutGap="12px">
+          <div fxLayout="row" fxLayoutGap="12px">
+            <button fxFlex mat-raised-button color="primary" (click)="setFormState()">
+              Set Form State
+            </button>
+            <button fxFlex mat-raised-button color="primary" (click)="clearFormState()">
+              Clear Form State
+            </button>
+          </div>
+          <div fxLayout="row" fxLayoutGap="12px">
+            <button fxFlex *ngIf="!showYearControl" mat-raised-button color="primary" (click)="addYearControl()">
+              Add Year Control
+            </button>
+            <button fxFlex *ngIf="showYearControl" mat-raised-button color="accent" (click)="removeYearControl()">
+              Remove Year Control
+            </button>
+            <button fxFlex *ngIf="!useColorFactory" mat-raised-button color="primary" (click)="setColorFactory()">
+              Use Color Factory
+            </button>
+            <button fxFlex *ngIf="useColorFactory" mat-raised-button color="accent" (click)="resetFactory()">
+              Reset Factory
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+    <!-- Current Resolved Car -->
+    <mat-card fxFlex>
+      <mat-card-title>Current Resolved Car Object</mat-card-title>
+      <mat-card-content>
+        <pre [innerHtml]="currentState | prettyjson:3"></pre>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+</div>
