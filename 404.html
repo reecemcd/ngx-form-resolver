@@ -2,11 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>NgxFormResolverApp</title>
+  <title>Form Resolver Examples</title>
   <base href="https://reecemcd.github.io/ngx-form-resolver/">
+  <!-- This stores the URL the user was attempting to go to in sessionStorage,
+  and then redirects all 404 responses to the app’s index.html page -->
+  <!-- See http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/ -->
+  <script>
+    sessionStorage.redirect = location.href;
+  </script>
+  <meta http-equiv="refresh" content="0;URL='https://reecemcd.github.io/ngx-form-resolver'"></meta>
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="stylesheet" href="styles.1d8b93d883ec77de39e5.css"></head>
+<script>
+  // See http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/
+  (function(){
+    var redirect = sessionStorage.redirect;
+    delete sessionStorage.redirect;
+    if (redirect && redirect != location.href) {
+      history.replaceState(null, null, redirect);
+    }
+  })();
+</script>
 <body>
   <app-root></app-root>
 <script type="text/javascript" src="runtime.ec2944dd8b20ec099bf3.js"></script><script type="text/javascript" src="polyfills.c6871e56cb80756a5498.js"></script><script type="text/javascript" src="main.6bd8f4ca388c82d1ab97.js"></script></body>
