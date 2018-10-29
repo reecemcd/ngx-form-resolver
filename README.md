@@ -19,7 +19,7 @@ Demo site with examples: [https://reecemcd.github.io/ngx-form-resolver](https://
 
 ## Installation
 
-`npm install ngx-form-resolver --save`
+`coming soon`
 
 
 
