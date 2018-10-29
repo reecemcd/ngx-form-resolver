@@ -36,7 +36,7 @@
 })
 ```
 
-2.) A FormResolver is designed to map a defined class/object to a certain `FormGroup`. We will use a basic `Car` class in this example.
+2.) A FormResolver is designed to map a defined class/object to a certain `FormGroup`. A basic `Car` class will be used in this example.
 
 ```TypeScript
 export class Car {
@@ -47,7 +47,7 @@ export class Car {
 }
 ```
 
-3.) Inject the `FormResolverBuilder` into a component:
+3.) Inject the `FormResolverBuilder`:
 
 ```TypeScript
 @Component({...})
@@ -56,7 +56,7 @@ export class CarFormComponent {
 }
 ```
 
-4.) Define your forms `FormGroup`:
+4.) Define a `FormGroup`:
 ```Typescript
 this.carFormGroup = formBuilder.group({
     'make': [''],
@@ -78,11 +78,11 @@ this.carFormResolver = this.formResolverBuilder
     .build();
 ```
 
-6.) Subscribe to changes:
+6.) Subscribe to changes via observable:
 ```Typescript
 this.carFormResolver.getFormState()
     .pipe(...)
-    .subscribe(...)
+    .subscribe((car: Car) => {...})
 ```
 
 ## API
@@ -125,7 +125,7 @@ type InputResolver<T> = (inputObject: T, controlName?: string) => any;
 type OutputResolver<T> = (outputObject: T, formValues: any, controlName?: string) => T;
 ```
 
-Included FormControlResolvers:
+Included default FormControlResolvers:
 * `FormControlResolvers.simple`: 
     * Used for directly mapping the value of a `FormControl` to a prop of the same name
 * `FormControlResolvers.simpleNumber`: 
@@ -163,7 +163,7 @@ There are a few default simple FormControlResolvers that are exported under `For
 
 You can also pass parameters to your own FormControlResolvers by wrapping them in a function that returns your `FormControlResolver`. See below or in the examples section for a more in depth look:
 ```Typescript
-const exampleControlResolver = (value: string) => new FormControlResolver(
+const exampleControlResolver = (value: any) => new FormControlResolver(
     (inputObj: any, controlName: string) => { ... },
     (outputObj: any, formValues: any, controlName: string) => { ... }
 )
@@ -173,7 +173,7 @@ const exampleControlResolver = (value: string) => new FormControlResolver(
 
 See the examples below for full implementations of some concepts listed above: 
 
-* Basic Form Resolver
-* Dynamic Form Resolver
-* Custom Form Resolver
-* Form Control Resolver w/ Parameters
+* [Basic Form Resolver](https://github.com/reecemcd/ngx-form-resolver/tree/master/src/app/examples/1-basic-form-resolver)
+* [Dynamic Form Resolver](https://github.com/reecemcd/ngx-form-resolver/tree/master/src/app/examples/2-dynamic-form-resolver)
+* [Custom Form Control Resolver](https://github.com/reecemcd/ngx-form-resolver/tree/master/src/app/examples/3-custom-form-control-resolver)
+* [Form Control Resolver w/ Parameters](https://github.com/reecemcd/ngx-form-resolver/tree/master/src/app/examples/4-form-control-resolver-parameters)
