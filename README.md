@@ -1,10 +1,10 @@
 # NGX Form Resolver
 
-A simple library for mapping classes to FormGroups with reusable resolver functions.
+A simple library for mapping objects to FormGroups with reusable resolver functions.
 
-Demo site with examples: [https://reecemcd.github.io/ngx-form-resolver](https://reecemcd.github.io/ngx-form-resolver/examples)
-
-
+* [Demo Site w/ Examples](https://reecemcd.github.io/ngx-form-resolver)
+* Stackblitz Interactive Examples _(coming soon)_
+* Changelog _(coming soon)_
 
 ## Table of Contents
 
@@ -13,7 +13,6 @@ Demo site with examples: [https://reecemcd.github.io/ngx-form-resolver](https://
 * [API](#api)
 * [Form Resolver Concept](#form-resolver-concept)
 * [Form Control Resolver Concept](#form-control-resolver-concept)
-* [Further Examples](#further-examples)
 
 
 
@@ -101,14 +100,25 @@ Service used to build a `FormResolver`.
 ### FormResolver
 
 * `setFormState(object: T)`
+    * pass an object to resolve to the form state
 * `getFormState(): Observable<T>`
+    * get an observable that returns the resolved form state as an object whenever changes occur
 * `getFormStateSnapshot(): T`
+    * get the current resolved form state object
 * `updateFormGroup(formGroup: FormGroup)`
+    * set a new FormGroup to watch
 * `updateFactory(factory: Function)`
+    * set a new factory function 
 * `updateResolverConfig(resolverConfig: { [key: string]: FormControlResolver<any> })`
+    * pass in a completely new config of formControlNames and resolvers
 * `addControl(controlName: string, formControlResolver: FormControlResolver<any>)`
+    * adds a control to be watched and resolved
+* `updateControl(controlName: string, formControlResolver: FormControlResolver<any>)`
+    * alias to addControl
 * `removeControl(controlName: string)`
+    * removes a control from being watched and resolved
 * `complete()`
+    * completes all form resolver subjects
 
 ### FormControlResolver
 
@@ -145,9 +155,13 @@ A `FormResolver<T>` maps values **to a `FormGroup` from an instance of `T`** *an
 
 * **FormGroup**: The `FormGroup` a `FormResolver` will be mapping to and from.
 
-* **ResolverConfig**: A config used to map specific `FormControl`s to `FormControlResolver`s using formControlNames (see below).
+* **ResolverConfig**: A config used to map specific `FormControl`s to `FormControlResolver`s using formControlNames (see [below](#further-examples)).
 
-Each of these items can be changed at any time using the provided API methods. After building a `FormResolver` the state of the form can be accessed directly as a snapshot or overtime as an observable.
+Each of these items can be changed at any time using the provided API methods. After building a `FormResolver` the state of the form can be accessed directly as a snapshot or over time as an observable. The state can also be set using an object or instance of the defined class.
+
+#### TIPS:
+* When passed a `null` value, a `FormResolver` will reset the target mapped control
+* Setting properties that are not in your form in your factory's return object will ensure the output form state contains those values
 
 ## Form Control Resolver Concept
 
@@ -161,7 +175,7 @@ An `OutputResolver` is passed the object being mapped, the full list of values i
 
 ### Form Control Resolvers & Parameters
 
-There are a few default simple FormControlResolvers that are exported under `FormControlResolvers`. These FormControlResolvers let you easily map form control values directly to object properties of the same name.
+There are a few default simple FormControlResolvers that are exported under `FormControlResolvers` (see [API](#api)). These FormControlResolvers let you easily map form control values directly to object properties of the same name.
 
 You can also pass parameters to your own FormControlResolvers by wrapping them in a function that returns your `FormControlResolver`. See below or in the examples section for a more in depth look:
 ```Typescript
@@ -170,12 +184,3 @@ const exampleControlResolver = (value: any) => new FormControlResolver(
     (outputObj: any, formValues: any, controlName: string) => { ... }
 )
 ```
-
-## Further Examples
-
-See the examples below for full implementations of some concepts listed above: 
-
-* [Basic Form Resolver](https://github.com/reecemcd/ngx-form-resolver/tree/master/src/app/examples/1-basic-form-resolver)
-* [Dynamic Form Resolver](https://github.com/reecemcd/ngx-form-resolver/tree/master/src/app/examples/2-dynamic-form-resolver)
-* [Custom Form Control Resolver](https://github.com/reecemcd/ngx-form-resolver/tree/master/src/app/examples/3-custom-form-control-resolver)
-* [Form Control Resolver w/ Parameters](https://github.com/reecemcd/ngx-form-resolver/tree/master/src/app/examples/4-form-control-resolver-parameters)

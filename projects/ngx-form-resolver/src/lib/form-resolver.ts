@@ -50,29 +50,55 @@ export class FormResolver<T> {
       });
   }
   
+  /**
+   * Set a new FormGroup to watch
+   * @param formGroup 
+   */
   public updateFormGroup(formGroup: FormGroup) {
     this.formGroup = formGroup;
     this.refreshResolver();
   }
 
+  /**
+   * Set a new factory function 
+   * @param factory 
+   */
   public updateFactory(factory: Function) {
     this.objectFactory = factory;
   }
 
+  /**
+   * Pass in a completely new config of formControlNames and resolvers
+   * @param resolverConfig 
+   */
   public updateResolverConfig(resolverConfig: { [key: string]: FormControlResolver<any> }) {
     this.resolvers = resolverConfig;
     this.refreshResolver();
   }
 
+  /**
+   * Adds a control to be watched and resolved
+   * @param controlName 
+   * @param formControlResolver 
+   */
   public addControl(controlName: string, formControlResolver: FormControlResolver<any>) {
     this.resolvers[controlName] = formControlResolver;
     this.updateResolverConfig(this.resolvers);
   }
 
+  /**
+   * Alias to addControl
+   * @param controlName 
+   * @param formControlResolver 
+   */
   public updateControl(controlName: string, formControlResolver: FormControlResolver<any>) {
     this.addControl(controlName, formControlResolver);
   }
 
+  /**
+   * Removes a control from being watched and resolved
+   * @param controlName 
+   */
   public removeControl(controlName: string) {
     try { delete this.resolvers[controlName] } catch(e) {};
     this.updateResolverConfig(this.resolvers);
@@ -132,7 +158,7 @@ export class FormResolver<T> {
   }
 
   /**
-   * Completes all subjects
+   * Completes all form resolver subjects
    */
   public complete() {
     this._stateSubject.complete();
