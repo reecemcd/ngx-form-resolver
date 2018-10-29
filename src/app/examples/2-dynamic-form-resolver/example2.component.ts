@@ -2,6 +2,8 @@ import { FormResolverBuilder, FormResolver, FormControlResolvers } from 'ngx-for
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Car } from '../example.models';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-example2',
@@ -18,7 +20,12 @@ export class Example2Component {
   carFormGroup: FormGroup;
   carFormResolver: FormResolver<Car>;
 
-  constructor(private formBuilder: FormBuilder, private formResolverBuilder: FormResolverBuilder) {
+  sourceTemplate$ = this.http.get(environment.urls.ex2 + '.component.html', {responseType: 'text'});
+  sourceComponent$ = this.http.get(environment.urls.ex2 + '.component.ts', {responseType: 'text'});
+
+  constructor(private formBuilder: FormBuilder, 
+    private http: HttpClient,
+    private formResolverBuilder: FormResolverBuilder) {
 
     this.carFormGroup = formBuilder.group({
       'make': [''],

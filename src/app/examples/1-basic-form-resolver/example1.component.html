@@ -1,43 +1,63 @@
-<!-- Basic Form -->
+<h1>Basic Form Resolver Example</h1>
 
-<h1>Basic Form Resolver</h1>
+<div fxLayout="column" fxLayoutGap="24px">
+  <div fxLayout="row" fxLayoutGap="24px">
 
-<div fxLayout="row" fxLayoutGap="24px">
-  <mat-card fxFlex>
-    <mat-card-title>Car Form Group</mat-card-title>
-    <mat-card-content>
-      <form [formGroup]="carFormGroup" fxLayout="column">
+    <!-- Form Card -->
+    <mat-card fxFlex>
+      <mat-card-title>Car Form Group</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="carFormGroup" fxLayout="column">
 
-        <mat-form-field>
-          <mat-select formControlName="make" placeholder="Make">
-            <mat-option value="Audi">Audi</mat-option>
-            <mat-option value="Ford">Ford</mat-option>
-            <mat-option value="Volvo">Volvo</mat-option>
-          </mat-select>
-        </mat-form-field>
+          <mat-form-field>
+            <mat-select formControlName="make" placeholder="Make">
+              <mat-option value="Audi">Audi</mat-option>
+              <mat-option value="Ford">Ford</mat-option>
+              <mat-option value="Volvo">Volvo</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-        <mat-form-field>
-          <input formControlName="model" matInput placeholder="Model">
-        </mat-form-field>
+          <mat-form-field>
+            <input formControlName="model" matInput placeholder="Model">
+          </mat-form-field>
 
-        <mat-form-field>
-          <input formControlName="year" matInput placeholder="Year">
-        </mat-form-field>
-        
-      </form>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button color="primary" 
-          [disabled]="!carFormGroup.valid" (click)="onSubmit()">
-          Submit
-        </button>
-    </mat-card-actions>
-  </mat-card>
+          <mat-form-field>
+            <input formControlName="year" matInput placeholder="Year">
+          </mat-form-field>
+          
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+          <button mat-raised-button color="primary" 
+            [disabled]="!carFormGroup.valid" (click)="onSubmit()">
+            Submit
+          </button>
+      </mat-card-actions>
+    </mat-card>
 
-  <mat-card fxFlex>
-    <mat-card-title>Resolved Submitted Car</mat-card-title>
-    <mat-card-content>
-      <pre [innerHtml]="submittedCar | prettyjson:3"></pre>
-    </mat-card-content>
-  </mat-card>
+    <!-- Result Card -->
+    <mat-card fxFlex>
+      <mat-card-title>Resolved Submitted Car</mat-card-title>
+      <mat-card-content>
+        <pre [innerHtml]="submittedCar | prettyjson:3"></pre>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Code Viewer -->
+  <div fxLayout="row" fxLayoutGap="24px">
+    <mat-card fxFlex [style.padding]="0">
+      <mat-tab-group>
+      
+        <mat-tab label="TS">
+          <prism language="typescript" [code]="sourceComponent$ | async"></prism>
+        </mat-tab>
+
+        <mat-tab label="HTML">
+          <prism language="html" [code]="sourceTemplate$ | async"></prism>
+        </mat-tab>
+      
+      </mat-tab-group>
+    </mat-card>
+  </div>
 </div>
