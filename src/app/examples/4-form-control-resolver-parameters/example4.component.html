@@ -1,29 +1,51 @@
-<!-- Basic Form -->
+<h1>Form Control Resolver Parameters Example</h1>
 
-<h1>Form Control Resolver Parameters</h1>
+<div fxLayout="column" fxLayoutGap="24px">
+  <div fxLayout="row" fxLayoutGap="24px">
 
-<div fxLayout="row" fxLayoutGap="24px">
+    <!-- Form Card -->
+    <mat-card fxFlex>
+      <mat-card-title>Message Form Group</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="messageFormGroup" fxLayout="column">
 
-  <!-- Message Form Group -->
-  <mat-card fxFlex>
-    <mat-card-title>Message Form Group</mat-card-title>
-    <mat-card-content>
-      <form [formGroup]="messageFormGroup" fxLayout="column">
+          <mat-form-field>
+            <textarea formControlName="message" matInput placeholder="Leave a message"></textarea>
+          </mat-form-field>
+          
+        </form>
+      </mat-card-content>
+    </mat-card>
 
-        <mat-form-field>
-          <textarea formControlName="message" matInput placeholder="Leave a message"></textarea>
-        </mat-form-field>
-        
-      </form>
-    </mat-card-content>
-  </mat-card>
+    <!-- Result Card -->
+    <mat-card fxFlex>
+      <mat-card-title>Current Resolved Message</mat-card-title>
+      <mat-card-content>
+        <pre [innerHtml]="currentMessage | prettyjson:3"></pre>
+      </mat-card-content>
+    </mat-card>
 
-  <!-- Current Resolved Message -->
-  <mat-card fxFlex>
-    <mat-card-title>Current Resolved Message</mat-card-title>
-    <mat-card-content>
-      <pre [innerHtml]="currentMessage | prettyjson:3"></pre>
-    </mat-card-content>
-  </mat-card>
+  </div>
+
+  <!-- Code Viewer -->
+  <div fxLayout="row" fxLayoutGap="24px">
+    <mat-card fxFlex [style.padding]="0">
+      <mat-tab-group>
+      
+        <mat-tab label="TS">
+          <prism language="typescript" [code]="sourceComponent$ | async"></prism>
+        </mat-tab>
+
+        <mat-tab label="Resolvers">
+          <prism language="typescript" [code]="sourceResolvers$ | async"></prism>
+        </mat-tab>
+
+        <mat-tab label="HTML">
+          <prism language="html" [code]="sourceTemplate$ | async"></prism>
+        </mat-tab>
+      
+      </mat-tab-group>
+    </mat-card>
+  </div>
 
 </div>

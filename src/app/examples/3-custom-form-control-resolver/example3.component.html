@@ -1,11 +1,11 @@
 <!-- Basic Form -->
 
-<h1>Custom Form Control Resolver</h1>
+<h1>Custom Form Control Resolver Example</h1>
 
 
 <div fxLayout="column" fxLayoutGap="24px">
 
-  <!-- Foo Form Group -->
+  <!-- Form Card -->
   <mat-card fxFlex>
     <mat-card-title>Car Form Group</mat-card-title>
     <mat-card-content>
@@ -29,7 +29,7 @@
 
   <div fxLayout="row" fxLayoutGap="24px">
 
-    <!-- Actions -->
+    <!-- Actions Card -->
     <mat-card fxFlex>
         <mat-card-title>Actions</mat-card-title>
         <mat-card-content fxLayout="row" fxLayoutGap="12px">
@@ -42,7 +42,7 @@
         </mat-card-content>
       </mat-card>
 
-    <!-- Current Resolved FooBarBaz -->
+    <!-- Result Card-->
     <mat-card fxFlex>
       <mat-card-title>Current Resolved FooBarBaz Object</mat-card-title>
       <mat-card-content>
@@ -50,6 +50,27 @@
       </mat-card-content>
     </mat-card>
 
+  </div>
+
+  <!-- Code Viewer -->
+  <div fxLayout="row" fxLayoutGap="24px">
+    <mat-card fxFlex [style.padding]="0">
+      <mat-tab-group>
+      
+        <mat-tab label="TS">
+          <prism language="typescript" [code]="sourceComponent$ | async"></prism>
+        </mat-tab>
+
+        <mat-tab label="Resolvers">
+          <prism language="typescript" [code]="sourceResolvers$ | async"></prism>
+        </mat-tab>
+
+        <mat-tab label="HTML">
+          <prism language="html" [code]="sourceTemplate$ | async"></prism>
+        </mat-tab>
+      
+      </mat-tab-group>
+    </mat-card>
   </div>
 
 </div>

@@ -10,7 +10,13 @@
 
 ::ng-deep {
     .mat-tab-body {
+        overflow: hidden !important;
+        padding-bottom: 48px;
+    } 
+    
+    .mat-tab-body-content {
         padding: 24px;
+        overflow: hidden;
     }
 
     .mat-tab-body-wrapper {

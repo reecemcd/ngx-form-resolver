@@ -1,10 +1,8 @@
-<!-- Basic Form -->
-
-<h1>Dynamic Form Resolver</h1>
+<h1>Dynamic Form Resolver Example</h1>
 
 <div fxLayout="column" fxLayoutGap="24px">
 
-  <!-- Car Form Group -->
+  <!-- Form Card -->
   <mat-card fxFlex>
     <mat-card-title>Car Form Group</mat-card-title>
     <mat-card-content>
@@ -32,7 +30,7 @@
 
   <div fxLayout="row" fxLayoutGap="24px">
 
-    <!-- Actions -->
+    <!-- Actions Card -->
     <mat-card fxFlex>
         <mat-card-title>Actions</mat-card-title>
         <mat-card-content fxLayout="column" fxLayoutGap="12px">
@@ -61,7 +59,7 @@
         </mat-card-content>
       </mat-card>
 
-    <!-- Current Resolved Car -->
+    <!-- Result Card -->
     <mat-card fxFlex>
       <mat-card-title>Current Resolved Car Object</mat-card-title>
       <mat-card-content>
@@ -69,6 +67,23 @@
       </mat-card-content>
     </mat-card>
 
+  </div>
+
+  <!-- Code Viewer -->
+  <div fxLayout="row" fxLayoutGap="24px">
+    <mat-card fxFlex [style.padding]="0">
+      <mat-tab-group>
+      
+        <mat-tab label="TS">
+          <prism language="typescript" [code]="sourceComponent$ | async"></prism>
+        </mat-tab>
+
+        <mat-tab label="HTML">
+          <prism language="html" [code]="sourceTemplate$ | async"></prism>
+        </mat-tab>
+      
+      </mat-tab-group>
+    </mat-card>
   </div>
 
 </div>

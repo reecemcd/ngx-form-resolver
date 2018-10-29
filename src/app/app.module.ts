@@ -13,6 +13,12 @@ import { Example3Component } from './examples/3-custom-form-control-resolver/exa
 import { Example4Component } from './examples/4-form-control-resolver-parameters/example4.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
+import { HttpClientModule } from '@angular/common/http';
+import { PrismModule } from '@sgbj/angular-prism';
+
+import 'prismjs/prism';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-markup';
 
 @NgModule({
   declarations: [
@@ -32,6 +38,8 @@ import { MaterialModule } from './material.module';
     FormResolverModule.forRoot(),
     AppRoutingModule,
     PrettyJsonModule,
+    HttpClientModule,
+    PrismModule,
   ],
   bootstrap: [AppComponent]
 })

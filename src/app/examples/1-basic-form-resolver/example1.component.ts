@@ -1,7 +1,9 @@
+import { environment } from './../../../environments/environment';
 import { FormResolverBuilder, FormResolver, FormControlResolvers } from 'ngx-form-resolver';
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Car } from '../example.models';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-example1',
@@ -16,7 +18,12 @@ export class Example1Component implements OnDestroy {
   carFormGroup: FormGroup;
   carFormResolver: FormResolver<Car>;
 
-  constructor(private formBuilder: FormBuilder, private formResolverBuilder: FormResolverBuilder) {
+  sourceTemplate$ = this.http.get(environment.urls.ex1 + '.component.html', {responseType: 'text'});
+  sourceComponent$ = this.http.get(environment.urls.ex1 + '.component.ts', {responseType: 'text'});
+
+  constructor(private formBuilder: FormBuilder,
+    private http: HttpClient, 
+    private formResolverBuilder: FormResolverBuilder) {
 
     this.carFormGroup = formBuilder.group({
       'make': [''],
