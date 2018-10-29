@@ -1,6 +1,8 @@
 # NGX Form Resolver
 
-##### A simple library for mapping classes to FormGroups with reusable resolver functions.
+A simple library for mapping classes to FormGroups with reusable resolver functions.
+
+Demo site with examples: [https://reecemcd.github.io/ngx-form-resolver](https://reecemcd.github.io/ngx-form-resolver/examples)
 
 
 
