@@ -4,10 +4,16 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build:lib": "ng build ngx-form-resolver",
+    "build:app": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "copy-license": "copy .\\LICENSE .\\dist\\ngx-form-resolver",
+    "copy-readme": "copy .\\README.md .\\dist\\ngx-form-resolver",
+    "copy-files": "npm run copy-license && npm run copy-readme",
+    "pack": "cd dist/ngx-form-resolver && npm pack",
+    "package": "npm run build:lib && npm run copy-files && npm run pack"
   },
   "private": true,
   "dependencies": {
