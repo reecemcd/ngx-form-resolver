@@ -1,10 +1,24 @@
-# NGX Form Resolver
+<h1 align="center">NGX Form Resolver</h1>
 
+<p align="center">
 A simple library for mapping objects to FormGroups with reusable resolver functions.
+</p>
 
-* [Demo Site w/ Examples](https://reecemcd.github.io/ngx-form-resolver)
-* Stackblitz Interactive Examples _(coming soon)_
-* Changelog _(coming soon)_
+<p align="center">
+    <a href="https://badge.fury.io/js/ngx-form-resolver"><img src="https://badge.fury.io/js/ngx-form-resolver.svg" alt="npm version" height="18"></a>
+    <a href="https://npmjs.org/ngx-form-resolver"><img src="https://img.shields.io/npm/dt/ngx-form-resolver.svg" alt="npm downloads" ></a>
+    <a href="https://github.com/reecemcd/ngx-form-resolver/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="mit license" height="18"></a>
+</p>
+
+---
+
+## Links
+
+* 📖 [Demo Site w/ Examples](https://reecemcd.github.io/ngx-form-resolver)
+* ⚡ Stackblitz Interactive Examples _(coming soon)_
+* 🗄 Changelog _(coming soon)_
+
+
 
 ## Table of Contents
 
@@ -18,7 +32,7 @@ A simple library for mapping objects to FormGroups with reusable resolver functi
 
 ## Installation
 
-`coming soon`
+`npm install ngx-form-resolver --save`
 
 
 
@@ -44,7 +58,6 @@ export class Car {
     make: string = '';
     model: string = '';
     year: number = null;
-    color: string = '';
 }
 ```
 
@@ -66,7 +79,7 @@ this.carFormGroup = formBuilder.group({
 });
 ```
 
-5.) Build your `FormResolver<Car>`:
+5.) Build a `FormResolver<Car>` with the class and FormGroup:
 ```Typescript
 this.carFormResolver = this.formResolverBuilder
     .setFactory(() => new Car())
@@ -85,6 +98,17 @@ this.carFormResolver.getFormState()
     .pipe(...)
     .subscribe((car: Car) => {...})
 ```
+
+7.) Set the value of the form state on demand:
+```Typescript
+this.carFormResolver.setFormState({
+        make: 'Ford';
+        model: 'Escape';
+        year: 2018;
+    } as Car);
+```
+
+
 
 ## API
 
@@ -155,13 +179,15 @@ A `FormResolver<T>` maps values **to a `FormGroup` from an instance of `T`** *an
 
 * **FormGroup**: The `FormGroup` a `FormResolver` will be mapping to and from.
 
-* **ResolverConfig**: A config used to map specific `FormControl`s to `FormControlResolver`s using formControlNames (see [below](#further-examples)).
+* **ResolverConfig**: A config used to map specific `FormControl`s to `FormControlResolver`s using formControlNames (see [below](#form-resolver-concept)).
 
 Each of these items can be changed at any time using the provided API methods. After building a `FormResolver` the state of the form can be accessed directly as a snapshot or over time as an observable. The state can also be set using an object or instance of the defined class.
 
 #### TIPS:
 * When passed a `null` value, a `FormResolver` will reset the target mapped control
 * Setting properties that are not in your form in your factory's return object will ensure the output form state contains those values
+
+
 
 ## Form Control Resolver Concept
 
@@ -173,11 +199,12 @@ An `InputResolver` is passed the object being mapped and the name of the control
 
 An `OutputResolver` is passed the object being mapped, the full list of values in the formGroup, and the name of the control that needs to be mapped to the object.
 
-### Form Control Resolvers & Parameters
+### Form Control Resolvers
 
 There are a few default simple FormControlResolvers that are exported under `FormControlResolvers` (see [API](#api)). These FormControlResolvers let you easily map form control values directly to object properties of the same name.
 
-You can also pass parameters to your own FormControlResolvers by wrapping them in a function that returns your `FormControlResolver`. See below or in the examples section for a more in depth look:
+#### TIPS:
+* You can also pass parameters to your own FormControlResolvers by wrapping them in a function that returns your `FormControlResolver`. See below or in the examples section for a more in depth look:
 ```Typescript
 const exampleControlResolver = (value: any) => new FormControlResolver(
     (inputObj: any, controlName: string) => { ... },

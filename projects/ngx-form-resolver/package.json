@@ -1,6 +1,13 @@
 {
   "name": "ngx-form-resolver",
   "version": "0.0.1",
+  "description": "A simple library for mapping objects to FormGroups with reusable resolver functions.",
+  "keywords" : [ "angular", "dynamic", "forms", "ngx", "reactive", "resolver", "typescript" ],
+  "license" : "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/reecemcd/ngx-form-resolver"
+  },
   "peerDependencies": {
     "@angular/common": "^7.0.0",
     "@angular/core": "^7.0.0"
