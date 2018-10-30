@@ -108,6 +108,12 @@ this.carFormResolver.setFormState({
     } as Car);
 ```
 
+8.) Finally, complete OnDestroy:
+```Typescript
+ngOnDestroy() {
+    this.carFormResolver.complete();
+}
+```
 
 
 ## API
