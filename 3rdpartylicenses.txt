@@ -624,6 +624,7 @@ SOFTWARE.
 
 
 ngx-form-resolver
+MIT
 
 @angular/material/toolbar
 
