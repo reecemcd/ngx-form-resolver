@@ -10,5 +10,5 @@ export class FooBarBaz {
     merged: { foobar: string, foobaz: string } = {
         foobar: '',
         foobaz: ''
-    }
+    };
 }

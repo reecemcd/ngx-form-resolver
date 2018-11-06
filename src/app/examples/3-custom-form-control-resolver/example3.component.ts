@@ -23,7 +23,7 @@ export class Example3Component implements OnDestroy {
   sourceComponent$ = this.http.get(environment.urls.ex3 + '.component.ts', {responseType: 'text'});
   sourceResolvers$ = this.http.get(environment.urls.ex3 + '.resolvers.ts', {responseType: 'text'});
 
-  constructor(private formBuilder: FormBuilder, 
+  constructor(private formBuilder: FormBuilder,
     private http: HttpClient,
     private formResolverBuilder: FormResolverBuilder) {
 
@@ -46,7 +46,7 @@ export class Example3Component implements OnDestroy {
     this.fooFormResolver.getFormState()
       .subscribe((foo: FooBarBaz) => {
         this.currentFoo = foo;
-      })
+      });
 
   }
 
