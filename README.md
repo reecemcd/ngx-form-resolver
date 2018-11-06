@@ -16,7 +16,7 @@ A simple library for mapping objects to FormGroups with reusable resolver functi
 ## Links
 
 * 📖 [Demo Site w/ Examples](https://reecemcd.github.io/ngx-form-resolver)
-* ⚡ Stackblitz Interactive Examples _(coming soon)_
+* ⚡ [Stackblitz Interactive Example](https://stackblitz.com/edit/ngx-form-resolver-simple)
 * 🗄 Changelog _(coming soon)_
 
 
