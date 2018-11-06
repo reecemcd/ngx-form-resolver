@@ -6,7 +6,7 @@ export class FormControlResolver<T> {
   outputResolver: OutputResolver<T>;
 
   constructor(
-    inputResolver: InputResolver<T>, 
+    inputResolver: InputResolver<T>,
     outputResolver: OutputResolver<T>
   ) {
     this.inputResolver = inputResolver;
