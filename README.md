@@ -15,7 +15,7 @@ A simple library for mapping objects to Angular FormGroups with reusable resolve
 
 ## Links
 
-* 📖 [Demo Site w/ Examples](https://reecemcd.github.io/ngx-form-resolver)
+* 🏃 [Demo Site w/ Examples](https://reecemcd.github.io/ngx-form-resolver)
 * ⚡ [Stackblitz Interactive Example](https://stackblitz.com/edit/ngx-form-resolver-simple)
 * 🗄 Changelog _(coming soon)_
 
@@ -52,7 +52,16 @@ A simple library for mapping objects to Angular FormGroups with reusable resolve
 })
 ```
 
-2.) A FormResolver is designed to map a defined class/object to a certain `FormGroup`. A basic `Car` class and `FormGroup` will be used in this example.
+2.) Inject the `FormResolverBuilder` (and `FormBuilder`):
+
+```TypeScript
+@Component({...})
+export class CarFormComponent {
+    constructor(private FormResolverBuilder: FormResolverBuilder, private formBuilder: FormBuilder ...) {...}
+}
+```
+
+3.) A FormResolver is designed to map a defined class/object to a certain `FormGroup`. A basic `Car` class and `FormGroup` will be used in this example.
 
 ```TypeScript
 export class Car {
@@ -60,23 +69,13 @@ export class Car {
     model: string = '';
     year: number = null;
 }
-
-...
-
+```
+```TypeScript
 this.carFormGroup = formBuilder.group({
     'make': [''],
     'model': [''],
     'year': [null]
 });
-```
-
-3.) Inject the `FormResolverBuilder`:
-
-```TypeScript
-@Component({...})
-export class CarFormComponent {
-    constructor(private FormResolverBuilder, ...) {...}
-}
 ```
 
 4.) Build a `FormResolver<Car>` with the class and FormGroup:
@@ -158,6 +157,7 @@ FormControlResolver type definition:
 class FormControlResolver<T> {
     inputResolver: InputResolver<T>;
     outputResolver: OutputResolver<T>;
+    ...
 }
 ```
 ```Typescript
@@ -171,27 +171,27 @@ Included default FormControlResolvers:
 * `FormControlResolvers.simple`: 
     * Used for directly mapping the value of a `FormControl` to a prop of the same name
 * `FormControlResolvers.simpleNumber`: 
-    * The `simple` formControlResolver except the output value is cast as a number
+    * The `simple` formControlResolver except the input & output values are cast as a number
 * `FormControlResolvers.simpleString`: 
-    * The `simple` formControlResolver except the output value is cast as a string
+    * The `simple` formControlResolver except the input & output values are cast as a string
 
 
 
 ## Form Resolver Concept
 
-A `FormResolver<T>` maps values **to a `FormGroup` from an instance of `T`** *and* **to an instance of `T` from a `FormGroup`**. A `FormResolver` is built from the three items below using the `FormResolverBuilder` service:
+A `FormResolver<T>` maps values **to a `FormGroup` from an instance of `T`** *and* **to an instance of `T` from a `FormGroup`**. A `FormResolver` is a configuration of `FormControlResolver`s that define and abstract away control  value mapping. A `FormResolver` is built from the three items below using the `FormResolverBuilder` service:
 
 * **Factory**: The base object a `FormResolver` will use to map form state to. Ultimately, the result of this factory is the base object a `FormGroup`'s state will be resolved into.
 
 * **FormGroup**: The `FormGroup` a `FormResolver` will be mapping to and from.
 
-* **ResolverConfig**: A config used to map specific `FormControl`s to `FormControlResolver`s using formControlNames (see [below](#form-resolver-concept)).
+* **ResolverConfig**: A config used to map specific `FormControl`s to `FormControlResolver`s using formControlNames (see [below](#form-control-resolver-concept)).
 
 Each of these items can be changed at any time using the provided API methods. After building a `FormResolver` the state of the form can be accessed directly as a snapshot or over time as an observable. The state can also be set using an object or instance of the defined class.
 
 #### TIPS:
 * When passed a `null` value, a `FormResolver` will reset the target mapped control
-* Setting properties that are not in your form in your factory's return object will ensure the output form state contains those values
+* Setting properties that are not in your form in your factory's return object will ensure the output form state contains those values (useful when you need to pass along object values not in your form)
 
 
 
@@ -199,21 +199,21 @@ Each of these items can be changed at any time using the provided API methods. A
 
 ### Input/Output Resolvers
 
-A `FormControlResolver` is a pair of functions used to map one form control to and from the target object class. The `InputResolver` function maps an object to a form and an `OutputResolver` function maps a form control value to an object.
+A `FormControlResolver` is a reusable, easily testable pair of functions used to map one form control to and from the target object/class. An `InputResolver` function maps an object to a form and an `OutputResolver` function maps a form control value to an object.
 
-An `InputResolver` is passed the object being mapped and the name of the control the resolver is trying to map it to. The return value of this function is the value that the FormControl will be set to.
+An `InputResolver` is passed the object being mapped and the name of the control the resolver is trying to map it to. The return value of this function is the value that the target FormControl will be set to.
 
 An `OutputResolver` is passed the object being mapped, the full list of values in the formGroup, and the name of the control that needs to be mapped to the object.
 
-### Form Control Resolvers
+### Default Form Control Resolvers
 
 There are a few default simple FormControlResolvers that are exported under `FormControlResolvers` (see [API](#api)). These FormControlResolvers let you easily map form control values directly to object properties of the same name.
 
 #### TIPS:
-* You can also pass parameters to your own FormControlResolvers by wrapping them in a function that returns your `FormControlResolver`. See below or in the examples section for a more in depth look:
+* You can also pass parameters to your own custom FormControlResolvers by wrapping them in a function that returns your `FormControlResolver`. See below or in the examples section for a more in depth look:
 ```Typescript
 const exampleControlResolver = (value: any) => new FormControlResolver(
-    (inputObj: any, controlName: string) => { ... },
-    (outputObj: any, formValues: any, controlName: string) => { ... }
+    (inputObject: any, controlName: string) => { ... },
+    (outputObject: any, formValues: any, controlName: string) => { ... }
 )
 ```
