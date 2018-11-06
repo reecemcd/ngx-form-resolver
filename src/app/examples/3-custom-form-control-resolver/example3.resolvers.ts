@@ -1,5 +1,5 @@
-import { FormControlResolver } from "ngx-form-resolver";
-import { FooBarBaz } from "../example.models";
+import { FormControlResolver } from 'ngx-form-resolver';
+import { FooBarBaz } from '../example.models';
 
 export const FooBarControlResolver = new FormControlResolver(
     (inputObj: FooBarBaz, controlName: string) => {

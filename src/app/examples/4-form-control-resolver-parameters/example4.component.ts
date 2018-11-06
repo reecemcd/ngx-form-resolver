@@ -22,7 +22,7 @@ export class Example4Component implements OnDestroy {
   sourceComponent$ = this.http.get(environment.urls.ex4 + '.component.ts', {responseType: 'text'});
   sourceResolvers$ = this.http.get(environment.urls.ex4 + '.resolvers.ts', {responseType: 'text'});
 
-  constructor(private formBuilder: FormBuilder, 
+  constructor(private formBuilder: FormBuilder,
     private http: HttpClient,
     private formResolverBuilder: FormResolverBuilder) {
 

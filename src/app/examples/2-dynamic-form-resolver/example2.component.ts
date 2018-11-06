@@ -1,5 +1,5 @@
 import { FormResolverBuilder, FormResolver, FormControlResolvers } from 'ngx-form-resolver';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Car } from '../example.models';
 import { HttpClient } from '@angular/common/http';
@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./example2.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Example2Component {
+export class Example2Component implements OnDestroy {
 
   currentState: Car = new Car();
   showYearControl: boolean = false;
@@ -23,7 +23,7 @@ export class Example2Component {
   sourceTemplate$ = this.http.get(environment.urls.ex2 + '.component.html', {responseType: 'text'});
   sourceComponent$ = this.http.get(environment.urls.ex2 + '.component.ts', {responseType: 'text'});
 
-  constructor(private formBuilder: FormBuilder, 
+  constructor(private formBuilder: FormBuilder,
     private http: HttpClient,
     private formResolverBuilder: FormResolverBuilder) {
 

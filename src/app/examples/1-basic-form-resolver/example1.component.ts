@@ -22,7 +22,7 @@ export class Example1Component implements OnDestroy {
   sourceComponent$ = this.http.get(environment.urls.ex1 + '.component.ts', {responseType: 'text'});
 
   constructor(private formBuilder: FormBuilder,
-    private http: HttpClient, 
+    private http: HttpClient,
     private formResolverBuilder: FormResolverBuilder) {
 
     this.carFormGroup = formBuilder.group({
