@@ -1,7 +1,7 @@
 <h1 align="center">NGX Form Resolver</h1>
 
 <p align="center">
-A simple library for mapping objects to FormGroups with reusable resolver functions.
+A simple library for mapping objects to Angular FormGroups with reusable resolver functions.
 </p>
 
 <p align="center">
