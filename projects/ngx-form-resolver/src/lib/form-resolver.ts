@@ -1,4 +1,3 @@
-import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AbstractControl } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
@@ -15,7 +14,7 @@ export class FormResolver<T> {
   private _updateSubject: Subject<any> = new Subject();
   private _stateSubjects: { [key: string]: Subject<any> } = {};
 
-  constructor(formGroup: FormGroup, objectFactory: Function, resolverConfig: { [key: string]: FormControlResolver<any> }) {    
+  constructor(formGroup: FormGroup, objectFactory: Function, resolverConfig: { [key: string]: FormControlResolver<any> }) {
     this.formGroup = formGroup;
     this.objectFactory = objectFactory;
     this.resolvers = resolverConfig;
@@ -29,7 +28,7 @@ export class FormResolver<T> {
 
     // Control level changes
     Object.keys(this.formGroup.controls).forEach((key: string) => {
-      let control: AbstractControl = this.formGroup.get(key);
+      const control: AbstractControl = this.formGroup.get(key);
       control.valueChanges.pipe(
           startWith(control.value),
           takeUntil(this._updateSubject.asObservable())
@@ -49,10 +48,10 @@ export class FormResolver<T> {
         this._stateSubject.next(this.getFormStateSnapshot());
       });
   }
-  
+
   /**
    * Set a new FormGroup to watch
-   * @param formGroup 
+   * @param formGroup
    */
   public updateFormGroup(formGroup: FormGroup) {
     this.formGroup = formGroup;
@@ -60,8 +59,8 @@ export class FormResolver<T> {
   }
 
   /**
-   * Set a new factory function 
-   * @param factory 
+   * Set a new factory function
+   * @param factory
    */
   public updateFactory(factory: Function) {
     this.objectFactory = factory;
@@ -69,7 +68,7 @@ export class FormResolver<T> {
 
   /**
    * Pass in a completely new config of formControlNames and resolvers
-   * @param resolverConfig 
+   * @param resolverConfig
    */
   public updateResolverConfig(resolverConfig: { [key: string]: FormControlResolver<any> }) {
     this.resolvers = resolverConfig;
@@ -78,8 +77,8 @@ export class FormResolver<T> {
 
   /**
    * Adds a control to be watched and resolved
-   * @param controlName 
-   * @param formControlResolver 
+   * @param controlName
+   * @param formControlResolver
    */
   public addControl(controlName: string, formControlResolver: FormControlResolver<any>) {
     this.resolvers[controlName] = formControlResolver;
@@ -88,8 +87,8 @@ export class FormResolver<T> {
 
   /**
    * Alias to addControl
-   * @param controlName 
-   * @param formControlResolver 
+   * @param controlName
+   * @param formControlResolver
    */
   public updateControl(controlName: string, formControlResolver: FormControlResolver<any>) {
     this.addControl(controlName, formControlResolver);
@@ -97,10 +96,10 @@ export class FormResolver<T> {
 
   /**
    * Removes a control from being watched and resolved
-   * @param controlName 
+   * @param controlName
    */
   public removeControl(controlName: string) {
-    try { delete this.resolvers[controlName] } catch(e) {};
+    try { delete this.resolvers[controlName]; } catch (e) {}
     this.updateResolverConfig(this.resolvers);
   }
 
@@ -112,9 +111,9 @@ export class FormResolver<T> {
   public setFormState(object: T) {
     if (object !== null && object !== undefined) {
       Object.keys(this.formGroup.controls).forEach((key: string) => {
-        let control: AbstractControl = this.formGroup.get(key);
+        const control: AbstractControl = this.formGroup.get(key);
         if (this.resolvers.hasOwnProperty(key)) {
-          let value = this.resolvers[key].inputResolver(object, key);
+          const value = this.resolvers[key].inputResolver(object, key);
           // If this resolved value is not null set the control and mark it as dirty
           if (value !== null) {
             control.setValue(value);

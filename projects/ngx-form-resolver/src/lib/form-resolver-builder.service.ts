@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormControlResolver } from './form-resolver.models';
@@ -39,7 +38,7 @@ export class FormResolverBuilder {
       );
     }
     else {
-      throw 'You must call setFactory, setFormGroup, and setResolversz before you can build a FormResolver<T>';
+      throw new Error('You must call setFactory, setFormGroup, and setResolvers before you can build a FormResolver<T>');
     }
   }
 }

@@ -1,4 +1,4 @@
-import { FormControlResolver } from "./form-resolver.models";
+import { FormControlResolver } from './form-resolver.models';
 
 export const FormControlResolvers = {
 
@@ -21,7 +21,7 @@ export const FormControlResolvers = {
   simpleNumber: new FormControlResolver(
     (inputObj: any, controlName: string) => {
       if (inputObj.hasOwnProperty(controlName)) {
-        return (inputObj[controlName] !== null) ? inputObj[controlName] + '' : null;
+        return (inputObj[controlName] !== null) ? Number(inputObj[controlName]) : null;
       }
     },
     (outputObj: any, formValues: any, controlName: string) => {

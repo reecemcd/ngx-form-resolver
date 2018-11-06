@@ -5,9 +5,9 @@ A simple library for mapping objects to FormGroups with reusable resolver functi
 </p>
 
 <p align="center">
-    <a href="https://badge.fury.io/js/ngx-form-resolver"><img src="https://badge.fury.io/js/ngx-form-resolver.svg" alt="npm version" height="18"></a>
-    <a href="https://npmjs.org/ngx-form-resolver"><img src="https://img.shields.io/npm/dt/ngx-form-resolver.svg" alt="npm downloads" ></a>
-    <a href="https://github.com/reecemcd/ngx-form-resolver/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="mit license" height="18"></a>
+    <a href="https://badge.fury.io/js/ngx-form-resolver" target="_blank"><img src="https://badge.fury.io/js/ngx-form-resolver.svg" alt="npm version" height="18"></a>
+    <a href="https://npmjs.org/ngx-form-resolver" target="_blank"><img src="https://img.shields.io/npm/dt/ngx-form-resolver.svg" alt="npm downloads" ></a>
+    <a href="https://github.com/reecemcd/ngx-form-resolver/blob/master/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="mit license" height="18"></a>
 </p>
 
 ---
@@ -51,7 +51,7 @@ A simple library for mapping objects to FormGroups with reusable resolver functi
 })
 ```
 
-2.) A FormResolver is designed to map a defined class/object to a certain `FormGroup`. A basic `Car` class will be used in this example.
+2.) A FormResolver is designed to map a defined class/object to a certain `FormGroup`. A basic `Car` class and `FormGroup` will be used in this example.
 
 ```TypeScript
 export class Car {
@@ -59,6 +59,12 @@ export class Car {
     model: string = '';
     year: number = null;
 }
+
+this.carFormGroup = formBuilder.group({
+    'make': [''],
+    'model': [''],
+    'year': [null]
+});
 ```
 
 3.) Inject the `FormResolverBuilder`:
@@ -70,16 +76,7 @@ export class CarFormComponent {
 }
 ```
 
-4.) Define a `FormGroup`:
-```Typescript
-this.carFormGroup = formBuilder.group({
-    'make': [''],
-    'model': [''],
-    'year': [null]
-});
-```
-
-5.) Build a `FormResolver<Car>` with the class and FormGroup:
+4.) Build a `FormResolver<Car>` with the class and FormGroup:
 ```Typescript
 this.carFormResolver = this.formResolverBuilder
     .setFactory(() => new Car())
@@ -92,14 +89,14 @@ this.carFormResolver = this.formResolverBuilder
     .build();
 ```
 
-6.) Subscribe to changes via observable:
+5.) Subscribe to changes via observable:
 ```Typescript
 this.carFormResolver.getFormState()
     .pipe(...)
     .subscribe((car: Car) => {...})
 ```
 
-7.) Set the value of the form state on demand:
+6.) Set the value of the form state on demand:
 ```Typescript
 this.carFormResolver.setFormState({
         make: 'Ford';
@@ -108,7 +105,7 @@ this.carFormResolver.setFormState({
     } as Car);
 ```
 
-8.) Finally, complete OnDestroy:
+7.) Finally, complete OnDestroy:
 ```Typescript
 ngOnDestroy() {
     this.carFormResolver.complete();

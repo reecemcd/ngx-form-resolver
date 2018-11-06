@@ -7,7 +7,7 @@ import { FormResolverBuilder } from './form-resolver-builder.service';
   declarations: [],
   exports: []
 })
-export class FormResolverModule { 
+export class FormResolverModule {
 
   constructor (@Optional() @SkipSelf() parentModule: FormResolverModule) {
     if (parentModule) {
