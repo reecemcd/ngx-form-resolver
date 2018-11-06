@@ -8,6 +8,7 @@ A simple library for mapping objects to FormGroups with reusable resolver functi
     <a href="https://badge.fury.io/js/ngx-form-resolver" target="_blank"><img src="https://badge.fury.io/js/ngx-form-resolver.svg" alt="npm version" height="18"></a>
     <a href="https://npmjs.org/ngx-form-resolver" target="_blank"><img src="https://img.shields.io/npm/dt/ngx-form-resolver.svg" alt="npm downloads" ></a>
     <a href="https://github.com/reecemcd/ngx-form-resolver/blob/master/LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="mit license" height="18"></a>
+    <a href="https://circleci.com/gh/reecemcd/ngx-form-resolver" target="_blank"><img src="https://circleci.com/gh/reecemcd/ngx-form-resolver.svg?style=svg" alt="mit license" height="18"></a>
 </p>
 
 ---
