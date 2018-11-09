@@ -12,3 +12,12 @@ export class FooBarBaz {
         foobaz: ''
     };
 }
+
+export class NestedExampleClass {
+    encodedMessage: string = '';
+    outer: { inner: { target: string } } = {
+        inner: {
+            target: ''
+        }
+    };
+}

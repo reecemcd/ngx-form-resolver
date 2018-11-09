@@ -30,7 +30,7 @@ export class Example3Component implements OnDestroy {
     this.fooFormGroup = formBuilder.group({
       'foo': [''],
       'bar': [''],
-      'baz': ['']
+      'baz': [''],
     });
 
     this.fooFormResolver = this.formResolverBuilder
@@ -39,7 +39,7 @@ export class Example3Component implements OnDestroy {
       .setResolvers({
         'foo': FormControlResolvers.simple,
         'bar': FooBarControlResolver,
-        'baz': FooBazControlResolver,
+        'baz': FooBazControlResolver
       })
       .build();
 

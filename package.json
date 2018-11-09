@@ -13,7 +13,8 @@
     "copy-readme": "copy .\\README.md .\\dist\\ngx-form-resolver",
     "copy-files": "npm run copy-license && npm run copy-readme",
     "pack": "cd dist/ngx-form-resolver && npm pack",
-    "package": "npm run build:lib && npm run copy-files && npm run pack"
+    "package": "npm run build:lib && npm run copy-files && npm run pack",
+    "commit": "git-cz"
   },
   "private": true,
   "dependencies": {
@@ -48,6 +49,8 @@
     "@types/node": "~8.9.4",
     "angular-cli-ghpages": "^0.5.3",
     "codelyzer": "~4.5.0",
+    "commitizen": "^3.0.4",
+    "cz-conventional-changelog": "^2.1.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~3.0.0",
@@ -62,5 +65,10 @@
     "tslib": "^1.9.0",
     "tslint": "~5.11.0",
     "typescript": "~3.1.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

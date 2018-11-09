@@ -68,13 +68,17 @@ export class Car {
     make: string = '';
     model: string = '';
     year: number = null;
+    packages = {
+        sport: false
+    }
 }
 ```
 ```TypeScript
 this.carFormGroup = formBuilder.group({
     'make': [''],
     'model': [''],
-    'year': [null]
+    'year': [null],
+    'sportPackageCheckbox': [false]
 });
 ```
 
@@ -86,7 +90,8 @@ this.carFormResolver = this.formResolverBuilder
     .setResolvers({
         'make': FormControlResolvers.simple,
         'model': FormControlResolvers.simple,
-        'year': FormControlResolvers.simpleNumber
+        'year': FormControlResolvers.simpleNumber,
+        'sportPackageCheckbox': FormControlResolvers.nested('packages.sport')
     })
     .build();
 ```
@@ -174,12 +179,16 @@ Included default FormControlResolvers:
     * The `simple` formControlResolver except the input & output values are cast as a number
 * `FormControlResolvers.simpleString`: 
     * The `simple` formControlResolver except the input & output values are cast as a string
-
-
+* `FormControlResolvers.nested(propertyPath: string | string[])`: 
+    * Used for mapping the value of a `FormControl` to a nested prop using a `.` notated string or array of prop strings
+* `FormControlResolvers.nestedNumber(propertyPath: string | string[])`: 
+    * The `nested` formControlResolver except the input & output values are cast as a number
+* `FormControlResolvers.nestedString(propertyPath: string | string[])`: 
+    * The `nested` formControlResolver except the input & output values are cast as a string
 
 ## Form Resolver Concept
 
-A `FormResolver<T>` maps values **to a `FormGroup` from an instance of `T`** *and* **to an instance of `T` from a `FormGroup`**. A `FormResolver` is a configuration of `FormControlResolver`s that define and abstract away control  value mapping. A `FormResolver` is built from the three items below using the `FormResolverBuilder` service:
+A `FormResolver<T>` maps values **to a `FormGroup` from an instance of `T`** *and* **to an instance of `T` from a `FormGroup`**. A `FormResolver` is a configuration of `FormControlResolver`s that define and abstract away control value mapping. Once configured, a `FormResolver` serves as an adapter between your class/object and `FormGroup`. A `FormResolver` is built from the three items below using the `FormResolverBuilder` service:
 
 * **Factory**: The base object a `FormResolver` will use to map form state to. Ultimately, the result of this factory is the base object a `FormGroup`'s state will be resolved into.
 
@@ -191,7 +200,8 @@ Each of these items can be changed at any time using the provided API methods. A
 
 #### TIPS:
 * When passed a `null` value, a `FormResolver` will reset the target mapped control
-* Setting properties that are not in your form in your factory's return object will ensure the output form state contains those values (useful when you need to pass along object values not in your form)
+* `FormResolver`s work with nested `FormGroups` - both the parent group or any of the child groups.
+* Setting properties that are not in your form in your factory's return object will ensure the output form state contains those values (useful when you need keep the values of props not in your form)
 
 
 
