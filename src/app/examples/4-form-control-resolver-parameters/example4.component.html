@@ -7,10 +7,14 @@
     <mat-card fxFlex>
       <mat-card-title>Message Form Group</mat-card-title>
       <mat-card-content>
-        <form [formGroup]="messageFormGroup" fxLayout="column">
+        <form [formGroup]="paramsFormGroup" fxLayout="column">
 
           <mat-form-field>
-            <textarea formControlName="message" matInput placeholder="Leave a message"></textarea>
+            <input formControlName="nestedValue" matInput placeholder="Nested Value">
+          </mat-form-field>
+
+          <mat-form-field>
+            <textarea formControlName="encodedMessage" matInput placeholder="Decoded Message"></textarea>
           </mat-form-field>
           
         </form>
@@ -19,9 +23,9 @@
 
     <!-- Result Card -->
     <mat-card fxFlex>
-      <mat-card-title>Current Resolved Message</mat-card-title>
+      <mat-card-title>Current Resolved State</mat-card-title>
       <mat-card-content>
-        <pre [innerHtml]="currentMessage | prettyjson:3"></pre>
+        <pre [innerHtml]="resolvedState | prettyjson:3"></pre>
       </mat-card-content>
     </mat-card>
 

@@ -1,13 +1,14 @@
-import { FormControlResolver } from "ngx-form-resolver";
+import { NestedExampleClass } from './../example.models';
+import { FormControlResolver } from 'ngx-form-resolver';
 
 export const replaceSpacesControlResolver = (value: string) => new FormControlResolver(
-    (inputObj: any, controlName: string) => {
-        return inputObj.replace(new RegExp(value, 'g'), ' ');
+    (inputObj: NestedExampleClass, controlName: string) => {
+        return inputObj.encodedMessage.replace(new RegExp(value, 'g'), ' ');
     },
-    (outputObj: any, formValues: any, controlName: string) => {
+    (outputObj: NestedExampleClass, formValues: any, controlName: string) => {
         if (formValues.hasOwnProperty(controlName)) {
-            outputObj = formValues[controlName].replace(/ /g, value);
+            outputObj.encodedMessage = formValues[controlName].replace(/ /g, value);
         }
         return outputObj;
     }
-)
+);
