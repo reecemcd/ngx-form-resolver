@@ -1,3 +1,8 @@
+## 1.0.2 (2018-12-03)
+
+### Fix
+* **form-control-resolvers:** When target control is empty (input is `""`) _Number resolvers will now return `null` instead of `0`.
+
 ## 1.0.1 (2018-11-08)
 
 ### Features

@@ -14,6 +14,11 @@ describe('FormResolver', () => {
     expect(service).toBeTruthy();
   });
 
+  it('should throw error on premature build', () => {
+    const service: FormResolverBuilder = TestBed.get(FormResolverBuilder);
+    expect(service.build).toThrowError();
+  });
+
   it('should return a FormResolver', () => {
     const service: FormResolverBuilder = TestBed.get(FormResolverBuilder);
     const fb: FormBuilder = TestBed.get(FormBuilder);
