@@ -17,17 +17,13 @@ const setNestedPropValue = (obj, propPath, newValue, separator = '.') => {
 };
 
 const castNumber = (value: any) => {
-  console.log(value, !isNaN(Number(value)));
   if (typeof value === 'number') {
-    console.log('a');
     return value;
   }
   else if (typeof value === 'string' && !isNaN(Number(value)) && value !== '') {
-    console.log('b');
     return Number(value);
   }
   else {
-    console.log('c');
     return null;
   }
 };
