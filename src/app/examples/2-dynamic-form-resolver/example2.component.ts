@@ -54,8 +54,8 @@ export class Example2Component implements OnDestroy {
   }
 
   addYearControl() {
-    this.carFormGroup.addControl('year', new FormControl(''));
-    this.carFormResolver.addControl('year', FormControlResolvers.simple);
+    this.carFormGroup.addControl('year', new FormControl(0));
+    this.carFormResolver.addControl('year', FormControlResolvers.simpleNumber);
     this.showYearControl = true;
   }
 

@@ -16,6 +16,22 @@ const setNestedPropValue = (obj, propPath, newValue, separator = '.') => {
   }, obj);
 };
 
+const castNumber = (value: any) => {
+  console.log(value, !isNaN(Number(value)));
+  if (typeof value === 'number') {
+    console.log('a');
+    return value;
+  }
+  else if (typeof value === 'string' && !isNaN(Number(value)) && value !== '') {
+    console.log('b');
+    return Number(value);
+  }
+  else {
+    console.log('c');
+    return null;
+  }
+};
+
 export const FormControlResolvers: {
     simple: FormControlResolver<any>,
     simpleNumber: FormControlResolver<any>,
@@ -44,12 +60,12 @@ export const FormControlResolvers: {
   simpleNumber: new FormControlResolver(
     (inputObj: any, controlName: string) => {
       if (inputObj.hasOwnProperty(controlName)) {
-        return (inputObj[controlName] !== null) ? Number(inputObj[controlName]) : null;
+        return (inputObj[controlName] !== null) ? castNumber(inputObj[controlName]) : null;
       }
     },
     (outputObj: any, formValues: any, controlName: string) => {
       if (formValues.hasOwnProperty(controlName)) {
-        outputObj[controlName] = Number(formValues[controlName]);
+        outputObj[controlName] = castNumber(formValues[controlName]);
       }
       return outputObj;
     }
@@ -90,12 +106,12 @@ export const FormControlResolvers: {
       return (ret !== null)
         ? (Number.isNaN(Number(ret)))
           ? undefined
-          : Number(ret)
+          : castNumber(ret)
         : null;
     },
     (outputObj: any, formValues: any, controlName: string) => {
       if (formValues.hasOwnProperty(controlName)) {
-        setNestedPropValue(outputObj, propPath, Number(formValues[controlName]));
+        setNestedPropValue(outputObj, propPath, castNumber(formValues[controlName]));
       }
       return outputObj;
     }

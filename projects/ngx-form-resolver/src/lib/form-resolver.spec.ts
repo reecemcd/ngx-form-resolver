@@ -42,6 +42,11 @@ describe('FormResolverBuilderService', () => {
     expect(testForm.get('foo').dirty).toBeFalsy();
   });
 
+  it('should handle null setState', () => {
+    testFormResolver.setFormState(null);
+    expect(testFormResolver.getFormStateSnapshot().foo).toEqual(null);
+  });
+
   it('should get form state', async(() => {
     testFormResolver.getFormState().subscribe(state => {
       expect(state.foo).toBeDefined();
@@ -72,14 +77,14 @@ describe('FormResolverBuilderService', () => {
 
   it('should add Control', () => {
     expect(testFormResolver.getFormStateSnapshot().bar).toBeUndefined();
-    testForm.addControl('bar', new FormControl([0]));
+    testForm.addControl('bar', new FormControl(0));
     testFormResolver.addControl('bar', FormControlResolvers.simpleNumber);
     expect(testFormResolver.getFormStateSnapshot().bar).toEqual(0);
   });
 
   it('should update Control', () => {
     expect(testFormResolver.getFormStateSnapshot().foo).toEqual(1);
-    testFormResolver.addControl('foo', FormControlResolvers.simpleString);
+    testFormResolver.updateControl('foo', FormControlResolvers.simpleString);
     expect(testFormResolver.getFormStateSnapshot().foo).toEqual('1');
   });
 
