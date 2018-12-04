@@ -1,6 +1,6 @@
 {
   "name": "ngx-form-resolver",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A simple library for mapping objects to Angular FormGroups with reusable resolver functions.",
   "keywords" : [ "angular", "dynamic", "forms", "ngx", "reactive", "resolver", "typescript" ],
   "license" : "MIT",

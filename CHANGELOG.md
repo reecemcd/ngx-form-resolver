@@ -1,3 +1,8 @@
+## 1.0.3 (2018-12-04)
+
+### Fix
+* **form-control-resolvers:** Removed unnecessary logs
+
 ## 1.0.2 (2018-12-03)
 
 ### Fix
