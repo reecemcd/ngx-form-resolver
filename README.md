@@ -133,26 +133,17 @@ Service used to build a `FormResolver`.
 
 ### FormResolver
 
-* `setFormState(object: T)`
-    * pass an object to resolve to the form state
-* `getFormState(): Observable<T>`
-    * get an observable that returns the resolved form state as an object whenever changes occur
-* `getFormStateSnapshot(): T`
-    * get the current resolved form state object
-* `updateFormGroup(formGroup: FormGroup)`
-    * set a new FormGroup to watch
-* `updateFactory(factory: Function)`
-    * set a new factory function 
-* `updateResolverConfig(resolverConfig: { [key: string]: FormControlResolver<any> })`
-    * pass in a completely new config of formControlNames and resolvers
-* `addControl(controlName: string, formControlResolver: FormControlResolver<any>)`
-    * adds a control to be watched and resolved
-* `updateControl(controlName: string, formControlResolver: FormControlResolver<any>)`
-    * alias to addControl
-* `removeControl(controlName: string)`
-    * removes a control from being watched and resolved
-* `complete()`
-    * completes all form resolver subjects
+| Method | Description |
+|--------|-------------|
+| `setFormState(object: T)` | pass an object to resolve to the form state |
+| `getFormState(): Observable<T>` | get an observable that returns the resolved form state as an object whenever changes occur |
+| `getFormStateSnapshot(): T` | get the current resolved form state object | set a new FormGroup to watch |
+| `updateFactory(factory: Function)` | set a new factory function |
+| `updateResolverConfig(resolverConfig: { [key: string]: FormControlResolver<any> })` | pass in a completely new config of formControlNames and resolvers |
+| `addControl(controlName: string, formControlResolver: FormControlResolver<any>)` | adds a control to be watched and resolved |
+| `updateControl(controlName: string, formControlResolver: FormControlResolver<any>)` | alias to addControl |
+| `removeControl(controlName: string)` | removes a control from being watched and resolved |
+| `complete()` | completes all form resolver subjects |
 
 ### FormControlResolver
 
@@ -173,18 +164,15 @@ type OutputResolver<T> = (outputObject: T, formValues: any, controlName?: string
 ```
 
 Included default FormControlResolvers:
-* `FormControlResolvers.simple`: 
-    * Used for directly mapping the value of a `FormControl` to a prop of the same name
-* `FormControlResolvers.simpleNumber`: 
-    * The `simple` formControlResolver except the input & output values are cast as a number
-* `FormControlResolvers.simpleString`: 
-    * The `simple` formControlResolver except the input & output values are cast as a string
-* `FormControlResolvers.nested(propertyPath: string | string[])`: 
-    * Used for mapping the value of a `FormControl` to a nested prop using a `.` notated string or array of prop strings
-* `FormControlResolvers.nestedNumber(propertyPath: string | string[])`: 
-    * The `nested` formControlResolver except the input & output values are cast as a number
-* `FormControlResolvers.nestedString(propertyPath: string | string[])`: 
-    * The `nested` formControlResolver except the input & output values are cast as a string
+
+| Resolver | Description |
+|----------|-------------|
+| `FormControlResolvers.simple` | Used for directly mapping the value of a `FormControl` to a prop of the same name |
+| `FormControlResolvers.simpleNumber` | The `simple` formControlResolver except the input & output values are cast as a number |
+| `FormControlResolvers.simpleString` | The `simple` formControlResolver except the input & output values are cast as a string |
+| `FormControlResolvers.nested(propertyPath: string \| string[])` | Used for mapping the value of a `FormControl` to a nested prop using a `.` notated string or array of prop strings |
+| `FormControlResolvers.nestedNumber(propertyPath: string \| string[])` | The `nested` formControlResolver except the input & output values are cast as a number |
+| `FormControlResolvers.nestedString(propertyPath: string \| string[])` | The `nested` formControlResolver except the input & output values are cast as a string |
 
 ## Form Resolver Concept
 
@@ -220,9 +208,9 @@ An `OutputResolver` is passed the object being mapped, the full list of values i
 There are a few default simple FormControlResolvers that are exported under `FormControlResolvers` (see [API](#api)). These FormControlResolvers let you easily map form control values directly to object properties of the same name.
 
 #### TIPS:
-* You can also pass parameters to your own custom FormControlResolvers by wrapping them in a function that returns your `FormControlResolver`. See below or in the examples section for a more in depth look:
+* It can sometimes be useful to create custom a FormControlResolver factory by wrapping it in a function that returns a `FormControlResolver`. See the example below:
 ```Typescript
-const exampleControlResolver = (value: any) => new FormControlResolver(
+const exampleControlResolverFactory = (value: any) => new FormControlResolver(
     (inputObject: any, controlName: string) => { ... },
     (outputObject: any, formValues: any, controlName: string) => { ... }
 )
